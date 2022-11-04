@@ -30,8 +30,8 @@ func (p HotelSort) String() string {
 }
 
 const (
-	DISTANCE HotelSort = "DISTANCE"
-	PRICE              = "PRICE"
+	DISTANCE = "DISTANCE"
+	PRICE    = "PRICE"
 )
 
 type HotelBoardType string
@@ -41,11 +41,11 @@ func (p HotelBoardType) String() string {
 }
 
 const (
-	ROOM_ONLY     HotelBoardType = "RO"  // Room Only
-	BREAKFAST                    = "BB"  // Bed & Breakfast
-	HALF_BOARD                   = "DBB" // Diner & Bed & Breakfast (only for Aggregators)
-	FULL_BOARD                   = "FB"  // Full Board (only for Aggregators)
-	ALL_INCLUSIVE                = "AI"  // All Inclusive (only for Aggregators)
+	ROOM_ONLY     = "RO"  // Room Only
+	BREAKFAST     = "BB"  // Bed & Breakfast
+	HALF_BOARD    = "DBB" // Diner & Bed & Breakfast (only for Aggregators)
+	FULL_BOARD    = "FB"  // Full Board (only for Aggregators)
+	ALL_INCLUSIVE = "AI"  // All Inclusive (only for Aggregators)
 )
 
 type HotelPaymentPolicy string
@@ -55,8 +55,8 @@ func (p HotelPaymentPolicy) String() string {
 }
 
 const (
-	DEPOSIT   HotelPaymentPolicy = "DEPOSIT"
-	GUARANTEE                    = "GUARANTEE"
+	DEPOSIT   = "DEPOSIT"
+	GUARANTEE = "GUARANTEE"
 )
 
 type RadiusUnit string
@@ -66,44 +66,42 @@ func (r RadiusUnit) String() string {
 }
 
 const (
-	MILE RadiusUnit = "MILE"
-	KM              = "KM"
+	MILE = "MILE"
+	KM   = "KM"
 )
 
-type ShoopingHotelOffersRequest struct {
-	OfferID       string             `json:"offerId,omitempty"`
-	HotelID       string             `json:"hotelId,omitempty"`
-	CityCode      string             `json:"cityCode,omitempty"`
+type ShoppingHotelOffersRequest struct {
+	PriceRange    string             `json:"priceRange"`
+	Currency      string             `json:"currency"`
+	RadiusUnit    RadiusUnit         `json:"radiusUnit"`
 	CheckInDate   string             `json:"checkInDate"`
 	CheckOutDate  string             `json:"checkOutDate"`
-	RoomQuantity  int                `json:"roomQuantity"`
-	Adults        int                `json:"adults"`
-	ChildAges     []int              `json:"childAges"`
+	Sort          HotelSort          `json:"sort"`
+	View          HotelView          `json:"view"`
+	PaymentPolicy HotelPaymentPolicy `json:"paymentPolicy"`
 	HotelName     string             `json:"hotelName"`
-	Latitude      float64            `json:"latitude"`
-	Longitude     float64            `json:"longitude"`
-	Radius        int                `json:"radius"`
-	RadiusUnit    RadiusUnit         `json:"radiusUnit"`
-	HotelIDs      []string           `json:"hotelIds"`
+	HotelID       string             `json:"hotelId,omitempty"`
+	OfferID       string             `json:"offerId,omitempty"`
+	BoardType     HotelBoardType     `json:"boardType"`
+	CityCode      string             `json:"cityCode,omitempty"`
+	Lang          string             `json:"lang"`
 	Chains        []string           `json:"chains"`
 	RateCodes     []string           `json:"rateCodes"`
 	Amenities     []string           `json:"amenities"`
 	Ratings       []int              `json:"ratings"`
-	PriceRange    string             `json:"priceRange"`
-	Currency      string             `json:"currency"`
-	PaymentPolicy HotelPaymentPolicy `json:"paymentPolicy"`
-	BoardType     HotelBoardType     `json:"boardType"`
-	IncludeClosed bool               `json:"includeClosed"`
+	ChildAges     []int              `json:"childAges"`
+	HotelIDs      []string           `json:"hotelIds"`
+	Longitude     float64            `json:"longitude"`
+	Radius        int                `json:"radius"`
+	Latitude      float64            `json:"latitude"`
+	Adults        int                `json:"adults"`
+	RoomQuantity  int                `json:"roomQuantity"`
 	BestRateOnly  bool               `json:"bestRateOnly"`
-	View          HotelView          `json:"view"`
-	Sort          HotelSort          `json:"sort"`
-	Lang          string             `json:"lang"`
-	//page[limit]
-	//page[offset]
+	IncludeClosed bool               `json:"includeClosed"`
 }
 
 // SetOfferID set offer id
-func (sR *ShoopingHotelOffersRequest) SetOfferID(offerID string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetOfferID(offerID string) *ShoppingHotelOffersRequest {
 
 	sR.OfferID = offerID
 
@@ -111,7 +109,7 @@ func (sR *ShoopingHotelOffersRequest) SetOfferID(offerID string) *ShoopingHotelO
 }
 
 // SetHotelID set hotel id
-func (sR *ShoopingHotelOffersRequest) SetHotelID(hotelID string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetHotelID(hotelID string) *ShoppingHotelOffersRequest {
 
 	sR.HotelID = hotelID
 
@@ -119,7 +117,7 @@ func (sR *ShoopingHotelOffersRequest) SetHotelID(hotelID string) *ShoopingHotelO
 }
 
 // SetCityCode set city code
-func (sR *ShoopingHotelOffersRequest) SetCityCode(cityCode string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetCityCode(cityCode string) *ShoppingHotelOffersRequest {
 
 	sR.CityCode = cityCode
 
@@ -127,7 +125,7 @@ func (sR *ShoopingHotelOffersRequest) SetCityCode(cityCode string) *ShoopingHote
 }
 
 // SetCheckInDate set checkin date
-func (sR *ShoopingHotelOffersRequest) SetCheckInDate(checkInDate string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetCheckInDate(checkInDate string) *ShoppingHotelOffersRequest {
 
 	// check date
 
@@ -137,7 +135,7 @@ func (sR *ShoopingHotelOffersRequest) SetCheckInDate(checkInDate string) *Shoopi
 }
 
 // SetCheckOutDate set checkout date
-func (sR *ShoopingHotelOffersRequest) SetCheckOutDate(checkOutDate string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetCheckOutDate(checkOutDate string) *ShoppingHotelOffersRequest {
 
 	// check date
 
@@ -147,7 +145,7 @@ func (sR *ShoopingHotelOffersRequest) SetCheckOutDate(checkOutDate string) *Shoo
 }
 
 // SetAdults set adults
-func (sR *ShoopingHotelOffersRequest) SetAdults(adults int) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetAdults(adults int) *ShoppingHotelOffersRequest {
 
 	// check date
 
@@ -157,7 +155,7 @@ func (sR *ShoopingHotelOffersRequest) SetAdults(adults int) *ShoopingHotelOffers
 }
 
 // AddChildAges add childAges
-func (sR *ShoopingHotelOffersRequest) AddChildAges(childAges ...int) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) AddChildAges(childAges ...int) *ShoppingHotelOffersRequest {
 
 	sR.ChildAges = childAges
 
@@ -165,7 +163,7 @@ func (sR *ShoopingHotelOffersRequest) AddChildAges(childAges ...int) *ShoopingHo
 }
 
 // SetHotelName set hotel name
-func (sR *ShoopingHotelOffersRequest) SetHotelName(hotelName string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetHotelName(hotelName string) *ShoppingHotelOffersRequest {
 
 	sR.HotelName = hotelName
 
@@ -173,7 +171,7 @@ func (sR *ShoopingHotelOffersRequest) SetHotelName(hotelName string) *ShoopingHo
 }
 
 // SetLatitude set latitude
-func (sR *ShoopingHotelOffersRequest) SetLatitude(latitude float64) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetLatitude(latitude float64) *ShoppingHotelOffersRequest {
 
 	sR.Latitude = latitude
 
@@ -181,7 +179,7 @@ func (sR *ShoopingHotelOffersRequest) SetLatitude(latitude float64) *ShoopingHot
 }
 
 // SetLongitude set longitude
-func (sR *ShoopingHotelOffersRequest) SetLongitude(longitude float64) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetLongitude(longitude float64) *ShoppingHotelOffersRequest {
 
 	sR.Longitude = longitude
 
@@ -189,7 +187,7 @@ func (sR *ShoopingHotelOffersRequest) SetLongitude(longitude float64) *ShoopingH
 }
 
 // SetRadius set radius
-func (sR *ShoopingHotelOffersRequest) SetRadius(radius int) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetRadius(radius int) *ShoppingHotelOffersRequest {
 
 	sR.Radius = radius
 
@@ -197,7 +195,7 @@ func (sR *ShoopingHotelOffersRequest) SetRadius(radius int) *ShoopingHotelOffers
 }
 
 // SetRadiusUnit set radiusUnit | KM or MILE
-func (sR *ShoopingHotelOffersRequest) SetRadiusUnit(radiusUnit RadiusUnit) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetRadiusUnit(radiusUnit RadiusUnit) *ShoppingHotelOffersRequest {
 
 	sR.RadiusUnit = radiusUnit
 
@@ -205,7 +203,7 @@ func (sR *ShoopingHotelOffersRequest) SetRadiusUnit(radiusUnit RadiusUnit) *Shoo
 }
 
 // AddHotelIDs add hotelIDs
-func (sR *ShoopingHotelOffersRequest) AddHotelIDs(hotelIDs ...string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) AddHotelIDs(hotelIDs ...string) *ShoppingHotelOffersRequest {
 
 	sR.HotelIDs = hotelIDs
 
@@ -213,7 +211,7 @@ func (sR *ShoopingHotelOffersRequest) AddHotelIDs(hotelIDs ...string) *ShoopingH
 }
 
 // AddChains add hotel chains filter
-func (sR *ShoopingHotelOffersRequest) AddChains(chains ...string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) AddChains(chains ...string) *ShoppingHotelOffersRequest {
 
 	sR.Chains = chains
 
@@ -221,7 +219,7 @@ func (sR *ShoopingHotelOffersRequest) AddChains(chains ...string) *ShoopingHotel
 }
 
 // AddRateCodes add rateCodes
-func (sR *ShoopingHotelOffersRequest) AddRateCodes(rateCodes ...string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) AddRateCodes(rateCodes ...string) *ShoppingHotelOffersRequest {
 
 	sR.RateCodes = rateCodes
 
@@ -229,7 +227,7 @@ func (sR *ShoopingHotelOffersRequest) AddRateCodes(rateCodes ...string) *Shoopin
 }
 
 // AddAmenities add amenities
-func (sR *ShoopingHotelOffersRequest) AddAmenities(amenities ...string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) AddAmenities(amenities ...string) *ShoppingHotelOffersRequest {
 
 	sR.Amenities = amenities
 
@@ -237,7 +235,7 @@ func (sR *ShoopingHotelOffersRequest) AddAmenities(amenities ...string) *Shoopin
 }
 
 // AddRatings add ratings
-func (sR *ShoopingHotelOffersRequest) AddRatings(ratings ...int) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) AddRatings(ratings ...int) *ShoppingHotelOffersRequest {
 
 	sR.Ratings = ratings
 
@@ -245,7 +243,7 @@ func (sR *ShoopingHotelOffersRequest) AddRatings(ratings ...int) *ShoopingHotelO
 }
 
 // SetPriceRange set priceRange
-func (sR *ShoopingHotelOffersRequest) SetPriceRange(priceRange string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetPriceRange(priceRange string) *ShoppingHotelOffersRequest {
 
 	sR.PriceRange = priceRange
 
@@ -253,7 +251,7 @@ func (sR *ShoopingHotelOffersRequest) SetPriceRange(priceRange string) *Shooping
 }
 
 // SetCurrency set currency
-func (sR *ShoopingHotelOffersRequest) SetCurrency(currency string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetCurrency(currency string) *ShoppingHotelOffersRequest {
 
 	sR.Currency = currency
 
@@ -261,7 +259,7 @@ func (sR *ShoopingHotelOffersRequest) SetCurrency(currency string) *ShoopingHote
 }
 
 // SetPaymentPolicy set payment policy
-func (sR *ShoopingHotelOffersRequest) SetPaymentPolicy(paymentPolicy HotelPaymentPolicy) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetPaymentPolicy(paymentPolicy HotelPaymentPolicy) *ShoppingHotelOffersRequest {
 
 	sR.PaymentPolicy = paymentPolicy
 
@@ -269,7 +267,7 @@ func (sR *ShoopingHotelOffersRequest) SetPaymentPolicy(paymentPolicy HotelPaymen
 }
 
 // SetBoardType set board type
-func (sR *ShoopingHotelOffersRequest) SetBoardType(BoardType HotelBoardType) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetBoardType(BoardType HotelBoardType) *ShoppingHotelOffersRequest {
 
 	sR.BoardType = BoardType
 
@@ -277,7 +275,7 @@ func (sR *ShoopingHotelOffersRequest) SetBoardType(BoardType HotelBoardType) *Sh
 }
 
 // IsIncludeClosed include closed
-func (sR *ShoopingHotelOffersRequest) IsIncludeClosed(includeClosed bool) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) IsIncludeClosed(includeClosed bool) *ShoppingHotelOffersRequest {
 
 	if includeClosed {
 		sR.IncludeClosed = true
@@ -287,7 +285,7 @@ func (sR *ShoopingHotelOffersRequest) IsIncludeClosed(includeClosed bool) *Shoop
 }
 
 // IsBestRateOnly best rate only
-func (sR *ShoopingHotelOffersRequest) IsBestRateOnly(bestRateOnly bool) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) IsBestRateOnly(bestRateOnly bool) *ShoppingHotelOffersRequest {
 
 	if bestRateOnly {
 		sR.BestRateOnly = true
@@ -297,7 +295,7 @@ func (sR *ShoopingHotelOffersRequest) IsBestRateOnly(bestRateOnly bool) *Shoopin
 }
 
 // SetView set view
-func (sR *ShoopingHotelOffersRequest) SetView(view HotelView) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetView(view HotelView) *ShoppingHotelOffersRequest {
 
 	sR.View = view
 
@@ -305,7 +303,7 @@ func (sR *ShoopingHotelOffersRequest) SetView(view HotelView) *ShoopingHotelOffe
 }
 
 // SetSort set sort
-func (sR *ShoopingHotelOffersRequest) SetSort(sort HotelSort) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetSort(sort HotelSort) *ShoppingHotelOffersRequest {
 
 	sR.Sort = sort
 
@@ -313,7 +311,7 @@ func (sR *ShoopingHotelOffersRequest) SetSort(sort HotelSort) *ShoopingHotelOffe
 }
 
 // SetLang set lang
-func (sR *ShoopingHotelOffersRequest) SetLang(lang string) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetLang(lang string) *ShoppingHotelOffersRequest {
 
 	sR.Lang = lang
 
@@ -323,7 +321,7 @@ func (sR *ShoopingHotelOffersRequest) SetLang(lang string) *ShoopingHotelOffersR
 // Helper functions
 
 // SetGeo set latitude & longitude
-func (sR *ShoopingHotelOffersRequest) SetGeo(latitude, longitude float64) *ShoopingHotelOffersRequest {
+func (sR *ShoppingHotelOffersRequest) SetGeo(latitude, longitude float64) *ShoppingHotelOffersRequest {
 
 	sR.SetLatitude(latitude)
 	sR.SetLongitude(longitude)
@@ -332,7 +330,7 @@ func (sR *ShoopingHotelOffersRequest) SetGeo(latitude, longitude float64) *Shoop
 }
 
 // JoinInts join int slice to string
-func (sR ShoopingHotelOffersRequest) JoinInts(intSlice []int) string {
+func (sR ShoppingHotelOffersRequest) JoinInts(intSlice []int) string {
 
 	valuesText := []string{}
 
@@ -346,10 +344,10 @@ func (sR ShoopingHotelOffersRequest) JoinInts(intSlice []int) string {
 }
 
 // GetURL returned key=value format for request on api
-func (sR ShoopingHotelOffersRequest) GetURL(baseURL, reqType string) string {
+func (sR ShoppingHotelOffersRequest) GetURL(baseURL, reqType string) string {
 
 	// set request url
-	url := shoopingHotelOffersURL
+	url := shoppingHotelOffersURL
 
 	// add version
 	switch reqType {
@@ -469,19 +467,19 @@ func (sR ShoopingHotelOffersRequest) GetURL(baseURL, reqType string) string {
 }
 
 // GetBody prepare request body
-func (sR ShoopingHotelOffersRequest) GetBody(reqType string) io.Reader {
+func (sR ShoppingHotelOffersRequest) GetBody(reqType string) io.Reader {
 	return nil
 }
 
-type ShoopingHotelOffersResponse struct {
-	Data         HotelData       `json:"data,omitempty"`
-	Meta         Meta            `json:"meta,omitempty"`
+type ShoppingHotelOffersResponse struct {
 	Dictionaries Dictionaries    `json:"dictionaries,omitempty"`
 	Errors       []ErrorResponse `json:"errors,omitempty"`
+	Meta         Meta            `json:"meta,omitempty"`
+	Data         HotelData       `json:"data,omitempty"`
 }
 
 // Decode implement Response interface
-func (dR *ShoopingHotelOffersResponse) Decode(rsp []byte) error {
+func (dR *ShoppingHotelOffersResponse) Decode(rsp []byte) error {
 
 	err := json.Unmarshal(rsp, &dR)
 	if err != nil {
@@ -491,15 +489,15 @@ func (dR *ShoopingHotelOffersResponse) Decode(rsp []byte) error {
 	return nil
 }
 
-type ShoopingHotelsOffersResponse struct {
-	Data         []HotelData     `json:"data,omitempty"`
-	Meta         Meta            `json:"meta,omitempty"`
+type ShoppingHotelsOffersResponse struct {
 	Dictionaries Dictionaries    `json:"dictionaries,omitempty"`
+	Data         []HotelData     `json:"data,omitempty"`
 	Errors       []ErrorResponse `json:"errors,omitempty"`
+	Meta         Meta            `json:"meta,omitempty"`
 }
 
 // Decode implement Response interface
-func (dR *ShoopingHotelsOffersResponse) Decode(rsp []byte) error {
+func (dR *ShoppingHotelsOffersResponse) Decode(rsp []byte) error {
 
 	err := json.Unmarshal(rsp, &dR)
 	if err != nil {
@@ -510,6 +508,6 @@ func (dR *ShoopingHotelsOffersResponse) Decode(rsp []byte) error {
 }
 
 // GetOffer return offer from list
-func (dR ShoopingHotelsOffersResponse) GetHotel(offerNum int) HotelData {
+func (dR ShoppingHotelsOffersResponse) GetHotel(offerNum int) HotelData {
 	return dR.Data[offerNum]
 }

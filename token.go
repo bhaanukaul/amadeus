@@ -11,20 +11,20 @@ import (
 )
 
 type token struct {
-	Type             string        `json:"type,omitempty"`
-	Username         string        `json:"username,omitempty"`
+	Created          time.Time
+	Error            string        `json:"error,omitempty"`
 	AppName          string        `json:"application_name,omitempty"`
 	ClientID         string        `json:"client_id,omitempty"`
 	TokenType        string        `json:"token_type,omitempty"`
 	AccessToken      string        `json:"access_token,omitempty"`
-	ExpiresIn        time.Duration `json:"expires_in,omitempty"`
 	State            string        `json:"state,omitempty"`
 	Scope            string        `json:"scope,omitempty"`
-	Error            string        `json:"error,omitempty"`
+	Type             string        `json:"type,omitempty"`
 	ErrorDescription string        `json:"error_description,omitempty"`
-	Code             int           `json:"code,omitempty"`
 	Title            string        `json:"title,omitempty"`
-	Created          time.Time
+	Username         string        `json:"username,omitempty"`
+	ExpiresIn        time.Duration `json:"expires_in,omitempty"`
+	Code             int           `json:"code,omitempty"`
 }
 
 // getAuthorization return token type and token
@@ -39,7 +39,7 @@ func (t *token) expired() bool {
 		return true
 	}
 
-	if time.Now().Sub(t.Created) < t.ExpiresIn {
+	if time.Since(t.Created) < t.ExpiresIn {
 		return true
 	}
 

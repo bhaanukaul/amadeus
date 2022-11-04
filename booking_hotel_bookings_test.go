@@ -30,10 +30,10 @@ func TestBookingHotelBookings(t *testing.T) {
 		// SEARCH FOR HOTEL OFFERS
 
 		// get request&response
-		searchReq, searchResp, err := amadeus.NewRequest(ShoopingHotelsOffers)
+		searchReq, searchResp, err := amadeus.NewRequest(ShoppingHotelsOffers)
 
 		// set request params
-		searchReq.(*ShoopingHotelOffersRequest).SetCityCode("LON")
+		searchReq.(*ShoppingHotelOffersRequest).SetCityCode("LON")
 
 		// send request
 		err = amadeus.Do(searchReq, &searchResp, "GET")
@@ -42,7 +42,7 @@ func TestBookingHotelBookings(t *testing.T) {
 		}
 
 		// get  response
-		searchRespData := searchResp.(*ShoopingHotelsOffersResponse)
+		searchRespData := searchResp.(*ShoppingHotelsOffersResponse)
 
 		// check if reponse exist
 		if len(searchRespData.Data) == 0 {
@@ -54,10 +54,10 @@ func TestBookingHotelBookings(t *testing.T) {
 		//
 
 		// get request&response
-		pricingReq, pricingResp, err := amadeus.NewRequest(ShoopingHotelOffers)
+		pricingReq, pricingResp, err := amadeus.NewRequest(ShoppingHotelOffers)
 
 		// set request params
-		pricingReq.(*ShoopingHotelOffersRequest).SetOfferID(
+		pricingReq.(*ShoppingHotelOffersRequest).SetOfferID(
 			searchRespData.GetHotel(3).GetOfferID(0),
 		)
 
@@ -68,7 +68,7 @@ func TestBookingHotelBookings(t *testing.T) {
 		}
 
 		// get response
-		pricingRespData := pricingResp.(*ShoopingHotelOffersResponse)
+		pricingRespData := pricingResp.(*ShoppingHotelOffersResponse)
 
 		// check if reponse exist
 		if len(pricingRespData.Data.Offers) == 0 {

@@ -13,8 +13,8 @@ func (l PhotosCategory) String() string {
 }
 
 const (
-	MOUNTAIN PhotosCategory = "MOUNTAIN"
-	BEACH                   = "BEACH"
+	MOUNTAIN = "MOUNTAIN"
+	BEACH    = "BEACH"
 )
 
 type MediaFilesGeneratedPhotosRequest struct {
@@ -80,15 +80,15 @@ type PhotosData struct {
 	Owner              string        `json:"owner,omitempty"`
 	AttachmentURI      string        `json:"attachmentUri,omitempty"`
 	Description        string        `json:"description,omitempty"`
-	FileKbSize         int           `json:"fileKbSize,omitempty"`
 	ExpirationDateTime string        `json:"expirationDateTime,omitempty"`
 	MediaMetadata      MediaMetadata `json:"mediaMetadata,omitempty"`
+	FileKbSize         int           `json:"fileKbSize,omitempty"`
 }
 
 type Dimensions struct {
+	UOM    string `json:"UOM,omitempty"`
 	Height int    `json:"height,omitempty"`
 	Width  int    `json:"width,omitempty"`
-	UOM    string `json:"UOM,omitempty"`
 }
 
 type MediaMetadata struct {

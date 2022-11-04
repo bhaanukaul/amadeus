@@ -37,7 +37,7 @@ func (sR *ShoppingSeatmapsRequest) AddOffer(offer FlightOffer) *ShoppingSeatmaps
 func (sR ShoppingSeatmapsRequest) GetURL(baseURL, reqType string) string {
 
 	// set request url
-	url := shoopingSeatmapsURL
+	url := shoppingSeatmapsURL
 
 	// add version
 	switch reqType {
@@ -85,10 +85,10 @@ func (sR ShoppingSeatmapsRequest) GetBody(reqType string) io.Reader {
 }
 
 type ShoppingSeatmapsResponse struct {
-	Meta         Meta            `json:"meta,omitempty"`
-	Data         []SeatData      `json:"data,omitempty"`
 	Dictionaries Dictionaries    `json:"dictionaries,omitempty"`
+	Data         []SeatData      `json:"data,omitempty"`
 	Errors       []ErrorResponse `json:"errors,omitempty"`
+	Meta         Meta            `json:"meta,omitempty"`
 }
 
 // Decode implement Response interface
@@ -125,12 +125,13 @@ type Arrival struct {
 
 type Decks struct {
 	DeckType          string            `json:"deckType,omitempty"`
-	DeckConfiguration DeckConfiguration `json:"deckConfiguration,omitempty"`
 	Facilities        []Facilities      `json:"facilities,omitempty"`
 	Seats             []Seats           `json:"seats,omitempty"`
+	DeckConfiguration DeckConfiguration `json:"deckConfiguration,omitempty"`
 }
 
 type DeckConfiguration struct {
+	ExitRowsX     []int `json:"exitRowsX,omitempty"`
 	Width         int   `json:"width,omitempty"`
 	Length        int   `json:"length,omitempty"`
 	StartseatRow  int   `json:"startseatRow,omitempty"`
@@ -139,7 +140,6 @@ type DeckConfiguration struct {
 	EndWingsRow   int   `json:"endWingsRow,omitempty"`
 	StartWingsX   int   `json:"startWingsX,omitempty"`
 	EndWingsX     int   `json:"endWingsX,omitempty"`
-	ExitRowsX     []int `json:"exitRowsX,omitempty"`
 }
 
 type Facilities struct {

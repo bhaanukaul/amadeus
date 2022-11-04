@@ -11,15 +11,12 @@ type ShoppingFlightDestinationRequest struct {
 	Origin            string `json:"origin"`
 	DepartureDateFrom string `json:"departureDateFrom"`
 	DepartureDateTo   string `json:"departureDateTo"`
-	OneWay            bool   `json:"oneWay"`
 	DurationFrom      string `json:"durationFrom"`
 	DurationTo        string `json:"durationTo"`
+	ViewBy            string `json:"viewBy"`
+	MaxPrice          int    `json:"maxPrice"`
+	OneWay            bool   `json:"oneWay"`
 	NonStop           bool   `json:"nonStop"`
-
-	// ViewBy possible options
-	// DATE, DESTINATION, DURATION, WEEK, or COUNTRY.
-	ViewBy   string `json:"viewBy"`
-	MaxPrice int    `json:"maxPrice"`
 }
 
 // SetOrigin set origin
@@ -91,7 +88,7 @@ func (dR *ShoppingFlightDestinationRequest) AddMaxPrice(price int) *ShoppingFlig
 func (dR ShoppingFlightDestinationRequest) GetURL(baseURL, reqType string) string {
 
 	// set request url
-	url := shoopingFlightDestinationsURL
+	url := shoppingFlightDestinationsURL
 
 	// add version
 	switch reqType {
@@ -130,7 +127,6 @@ func (dR ShoppingFlightDestinationRequest) GetURL(baseURL, reqType string) strin
 
 		url = url + "?" + strings.Join(queryParams, "&")
 
-		break
 	}
 
 	return baseURL + url
@@ -143,10 +139,10 @@ func (dR ShoppingFlightDestinationRequest) GetBody(reqType string) io.Reader {
 }
 
 type ShoppingFlightDestinationResponse struct {
-	Meta         Meta            `json:"meta,omitempty"`
-	Data         []Data          `json:"data,omitempty"`
 	Dictionaries Dictionaries    `json:"dictionaries,omitempty"`
+	Data         []Data          `json:"data,omitempty"`
 	Errors       []ErrorResponse `json:"errors,omitempty"`
+	Meta         Meta            `json:"meta,omitempty"`
 }
 
 // Decode implement Response interface

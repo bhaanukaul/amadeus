@@ -10,16 +10,16 @@ import (
 type TravelAnalyticsAirTrafficType string
 
 const (
-	TRAVELED TravelAnalyticsAirTrafficType = "TRAVELED"
-	BOOKED                                 = "BOOKED"
-	BUSIEST                                = "BUSIEST"
+	TRAVELED = "TRAVELED"
+	BOOKED   = "BOOKED"
+	BUSIEST  = "BUSIEST"
 )
 
 type AirDirection string
 
 const (
-	ARRIVING  AirDirection = "ARRIVING"
-	DEPARTING              = "DEPARTING"
+	ARRIVING  = "ARRIVING"
+	DEPARTING = "DEPARTING"
 )
 
 type TravelAnalyticsAirTrafficRequest struct {
@@ -113,7 +113,6 @@ func (dR TravelAnalyticsAirTrafficRequest) GetURL(baseURL, reqType string) strin
 				queryParams = append(queryParams, "max="+dR.Max)
 			}
 
-			break
 		case BOOKED:
 
 			url = url + "/booked"
@@ -129,7 +128,6 @@ func (dR TravelAnalyticsAirTrafficRequest) GetURL(baseURL, reqType string) strin
 				queryParams = append(queryParams, "max="+dR.Max)
 			}
 
-			break
 		case BUSIEST:
 
 			url = url + "/busiest-period"
@@ -141,12 +139,10 @@ func (dR TravelAnalyticsAirTrafficRequest) GetURL(baseURL, reqType string) strin
 				queryParams = append(queryParams, "direction="+fmt.Sprintf("%v", dR.Direction))
 			}
 
-			break
 		}
 
 		url = url + "?" + strings.Join(queryParams, "&")
 
-		break
 	}
 
 	return baseURL + url
@@ -159,10 +155,10 @@ func (dR TravelAnalyticsAirTrafficRequest) GetBody(reqType string) io.Reader {
 }
 
 type TravelAnalyticsAirTrafficResponse struct {
-	Meta     Meta            `json:"meta,omitempty"`
 	Data     []AnayticsData  `json:"data,omitempty"`
 	Warnings []Warnings      `json:"warnings,omitempty"`
 	Errors   []ErrorResponse `json:"errors,omitempty"`
+	Meta     Meta            `json:"meta,omitempty"`
 }
 
 // Decode implement Response interface

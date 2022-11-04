@@ -12,15 +12,12 @@ type ShoppingFlightDatesRequest struct {
 	Destination       string `json:"destination"`
 	DepartureDateFrom string `json:"departureDateFrom"`
 	DepartureDateTo   string `json:"departureDateTo"`
-	OneWay            bool   `json:"oneWay"`
 	DurationFrom      string `json:"durationFrom"`
 	DurationTo        string `json:"durationTo"`
+	ViewBy            string `json:"viewBy"`
+	MaxPrice          int    `json:"maxPrice"`
+	OneWay            bool   `json:"oneWay"`
 	NonStop           bool   `json:"nonStop"`
-
-	// ViewBy possible options
-	// DATE, DURATION,or WEEK.
-	ViewBy   string `json:"viewBy"`
-	MaxPrice int    `json:"maxPrice"`
 }
 
 // SetOrigin set origin
@@ -100,7 +97,7 @@ func (dR *ShoppingFlightDatesRequest) AddMaxPrice(price int) *ShoppingFlightDate
 func (dR ShoppingFlightDatesRequest) GetURL(baseURL, reqType string) string {
 
 	// set request url
-	url := shoopingFlightDatesURL
+	url := shoppingFlightDatesURL
 
 	// add version
 	switch reqType {
@@ -139,8 +136,6 @@ func (dR ShoppingFlightDatesRequest) GetURL(baseURL, reqType string) string {
 		}
 
 		url = url + "?" + strings.Join(queryParams, "&")
-
-		break
 	}
 
 	return baseURL + url

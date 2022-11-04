@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 	"time"
-        "encoding/json"
-	"amadeus2"
+
+	"github.com/bhaanukaul/amadeus"
 )
 
 func main() {
@@ -34,6 +34,6 @@ func main() {
 
 	// get response
 	offerRespData := offerResp.(*amadeus.ShoppingFlightOffersResponse)
-        println(offerRespData)
+	println(offerRespData)
 
 }

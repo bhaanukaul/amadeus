@@ -4,10 +4,10 @@ import "time"
 
 type HotelData struct {
 	Type      string        `json:"type,omitempty"`
+	Self      string        `json:"self,omitempty"`
+	Offers    []HotelOffers `json:"offers,omitempty"`
 	Hotel     Hotel         `json:"hotel,omitempty"`
 	Available bool          `json:"available,omitempty"`
-	Offers    []HotelOffers `json:"offers,omitempty"`
-	Self      string        `json:"self,omitempty"`
 }
 
 // GetOfferID return offerID from list
@@ -16,22 +16,22 @@ func (dR HotelData) GetOfferID(offerNum int) string {
 }
 
 type Hotel struct {
-	Type          string        `json:"type,omitempty"`
+	Address       HotelAddress  `json:"address,omitempty"`
+	Contact       HotelContact  `json:"contact,omitempty"`
+	Description   Description   `json:"description,omitempty"`
+	HotelDistance HotelDistance `json:"hotelDistance,omitempty"`
 	HotelID       string        `json:"hotelId,omitempty"`
 	ChainCode     string        `json:"chainCode,omitempty"`
 	BrandCode     string        `json:"brandCode,omitempty"`
 	DupeID        string        `json:"dupeId,omitempty"`
 	Name          string        `json:"name,omitempty"`
 	Rating        string        `json:"rating,omitempty"`
-	Description   Description   `json:"description,omitempty"`
+	Type          string        `json:"type,omitempty"`
+	CityCode      string        `json:"cityCode,omitempty"`
 	Amenities     []string      `json:"amenities,omitempty"`
 	Media         []Media       `json:"media,omitempty"`
-	CityCode      string        `json:"cityCode,omitempty"`
-	Latitude      float64       `json:"latitude,omitempty"`
 	Longitude     float64       `json:"longitude,omitempty"`
-	HotelDistance HotelDistance `json:"hotelDistance,omitempty"`
-	Address       HotelAddress  `json:"address,omitempty"`
-	Contact       HotelContact  `json:"contact,omitempty"`
+	Latitude      float64       `json:"latitude,omitempty"`
 }
 
 type Description struct {
@@ -43,15 +43,15 @@ type Media struct {
 	Category string `json:"category,omitempty"`
 }
 type HotelDistance struct {
-	Distance     float64 `json:"distance,omitempty"`
 	DistanceUnit string  `json:"distanceUnit,omitempty"`
+	Distance     float64 `json:"distance,omitempty"`
 }
 type HotelAddress struct {
-	Lines       []string `json:"lines,omitempty"`
 	PostalCode  string   `json:"postalCode,omitempty"`
 	CityName    string   `json:"cityName,omitempty"`
 	CountryCode string   `json:"countryCode,omitempty"`
 	StateCode   string   `json:"stateCode,omitempty"`
+	Lines       []string `json:"lines,omitempty"`
 }
 type HotelContact struct {
 	Phone string `json:"phone,omitempty"`
@@ -60,22 +60,22 @@ type HotelContact struct {
 }
 
 type HotelOffers struct {
-	Type                string              `json:"type,omitempty"`
-	ID                  string              `json:"id,omitempty"`
-	CheckInDate         string              `json:"checkInDate,omitempty"`
-	CheckOutDate        string              `json:"checkOutDate,omitempty"`
-	RoomQuantity        int                 `json:"roomQuantity,omitempty"`
-	RateCode            string              `json:"rateCode,omitempty"`
-	RateFamilyEstimated RateFamilyEstimated `json:"rateFamilyEstimated,omitempty"`
-	Category            string              `json:"category,omitempty"`
-	Description         Description         `json:"description,omitempty"`
-	Commission          Commission          `json:"commission,omitempty"`
-	BoardType           string              `json:"boardType,omitempty"`
-	Room                Room                `json:"room,omitempty"`
-	Guests              Guests              `json:"guests,omitempty"`
-	Price               HotelPrice          `json:"price,omitempty"`
 	Policies            Policies            `json:"policies,omitempty"`
+	Room                Room                `json:"room,omitempty"`
+	Commission          Commission          `json:"commission,omitempty"`
+	RateFamilyEstimated RateFamilyEstimated `json:"rateFamilyEstimated,omitempty"`
+	Description         Description         `json:"description,omitempty"`
 	Self                string              `json:"self,omitempty"`
+	RateCode            string              `json:"rateCode,omitempty"`
+	CheckOutDate        string              `json:"checkOutDate,omitempty"`
+	Category            string              `json:"category,omitempty"`
+	CheckInDate         string              `json:"checkInDate,omitempty"`
+	BoardType           string              `json:"boardType,omitempty"`
+	ID                  string              `json:"id,omitempty"`
+	Type                string              `json:"type,omitempty"`
+	Price               HotelPrice          `json:"price,omitempty"`
+	Guests              Guests              `json:"guests,omitempty"`
+	RoomQuantity        int                 `json:"roomQuantity,omitempty"`
 }
 
 type RateFamilyEstimated struct {
@@ -89,20 +89,20 @@ type Commission struct {
 }
 
 type Room struct {
+	Description   Description   `json:"description,omitempty"`
 	Type          string        `json:"type,omitempty"`
 	TypeEstimated TypeEstimated `json:"typeEstimated,omitempty"`
-	Description   Description   `json:"description,omitempty"`
 }
 
 type TypeEstimated struct {
 	Category string `json:"category,omitempty"`
-	Beds     int    `json:"beds,omitempty"`
 	BedType  string `json:"bedType,omitempty"`
+	Beds     int    `json:"beds,omitempty"`
 }
 
 type Guests struct {
-	Adults    int   `json:"adults,omitempty"`
 	ChildAges []int `json:"childAges,omitempty"`
+	Adults    int   `json:"adults,omitempty"`
 }
 
 type HotelPrice struct {
@@ -114,14 +114,13 @@ type HotelPrice struct {
 }
 
 type HotelPriceTaxes struct {
-	Currency string `json:"currency,omitempty"`
-	Amount   string `json:"amount,omitempty"`
-	Code     string `json:"code,omitempty"`
-	//Percentage       float64 `json:"percentage,omitempty"`
-	Included         bool   `json:"included,omitempty"`
+	Currency         string `json:"currency,omitempty"`
+	Amount           string `json:"amount,omitempty"`
+	Code             string `json:"code,omitempty"`
 	Description      string `json:"description,omitempty"`
 	PricingFrequency string `json:"pricingFrequency,omitempty"`
 	PricingMode      string `json:"pricingMode,omitempty"`
+	Included         bool   `json:"included,omitempty"`
 }
 
 type Variations struct {
@@ -142,13 +141,13 @@ type Changes struct {
 }
 
 type Policies struct {
+	CheckInOut   CheckInOut   `json:"checkInOut,omitempty"`
+	Cancellation Cancellation `json:"cancellation,omitempty"`
 	PaymentType  string       `json:"paymentType,omitempty"`
-	Guarantee    Guarantee    `json:"guarantee,omitempty"`
+	HoldTime     HoldTime     `json:"holdTime,omitempty"`
 	Deposit      Deposit      `json:"deposit,omitempty"`
 	Prepay       Prepay       `json:"prepay,omitempty"`
-	HoldTime     HoldTime     `json:"holdTime,omitempty"`
-	Cancellation Cancellation `json:"cancellation,omitempty"`
-	CheckInOut   CheckInOut   `json:"checkInOut,omitempty"`
+	Guarantee    Guarantee    `json:"guarantee,omitempty"`
 }
 
 type Guarantee struct {
@@ -178,12 +177,12 @@ type HoldTime struct {
 	Deadline string `json:"deadline,omitempty"`
 }
 type Cancellation struct {
-	Type           string      `json:"type,omitempty"`
-	Amount         string      `json:"amount,omitempty"`
-	NumberOfNights int         `json:"numberOfNights,omitempty"`
-	Percentage     string      `json:"percentage,omitempty"`
 	Deadline       time.Time   `json:"deadline,omitempty"`
 	Description    Description `json:"description,omitempty"`
+	Type           string      `json:"type,omitempty"`
+	Amount         string      `json:"amount,omitempty"`
+	Percentage     string      `json:"percentage,omitempty"`
+	NumberOfNights int         `json:"numberOfNights,omitempty"`
 }
 
 type CheckInOut struct {

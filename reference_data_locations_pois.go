@@ -13,10 +13,10 @@ func (c PoisCategory) String() string {
 }
 
 const (
-	SIGHTS     PoisCategory = "SIGHTS"
-	NIGHTLIFE               = "NIGHTLIFE"
-	RESTARAUNT              = "RESTARAUNT"
-	SHOOPING                = "SHOOPING"
+	SIGHTS     = "SIGHTS"
+	NIGHTLIFE  = "NIGHTLIFE"
+	RESTARAUNT = "RESTARAUNT"
+	SHOOPING   = "SHOOPING"
 )
 
 type ReferenceDataLocationsPoisRequest struct {
@@ -234,13 +234,13 @@ func (dR *ReferenceDataLocationsPoiResponse) Decode(rsp []byte) error {
 type PoisData struct {
 	Type     string   `json:"type"`
 	ID       string   `json:"id"`
-	Self     PoisSelf `json:"self"`
 	SubType  string   `json:"subType"`
 	Name     string   `json:"name"`
-	Rank     int      `json:"rank"`
-	GeoCode  GeoCode  `json:"geoCode"`
 	Category string   `json:"category"`
+	Self     PoisSelf `json:"self"`
 	Tags     []string `json:"tags"`
+	GeoCode  GeoCode  `json:"geoCode"`
+	Rank     int      `json:"rank"`
 }
 
 type PoisSelf struct {

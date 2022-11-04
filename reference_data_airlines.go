@@ -36,8 +36,6 @@ func (dR ReferenceDataAirlinesRequest) GetURL(baseURL, reqType string) string {
 		queryParams = append(queryParams, "airlineCodes="+strings.Join(dR.AirlineCodes, ","))
 
 		url = url + "?" + strings.Join(queryParams, "&")
-
-		break
 	}
 
 	return baseURL + url
@@ -68,7 +66,7 @@ func (dR *ReferenceDataAirlinesResponse) Decode(rsp []byte) error {
 }
 
 type AirlineData struct {
-	Type         string `json:"typ,omitemptye"`
+	Type         string `json:"typ,omitempty"`
 	IataCode     string `json:"iataCode,omitempty"`
 	IcaoCode     string `json:"icaoCode,omitempty"`
 	BusinessName string `json:"businessName,omitempty"`
