@@ -8,14 +8,14 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func TestShoopingHotelsOffers(t *testing.T) {
+func TestShoppingHotelsOffers(t *testing.T) {
 
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println("Not found .env file")
 	}
 
-	t.Run("TestShoopingHotelsOffers", func(t *testing.T) {
+	t.Run("TestShoppingHotelsOffers", func(t *testing.T) {
 
 		// create client
 		amadeus, err := New(
@@ -28,10 +28,10 @@ func TestShoopingHotelsOffers(t *testing.T) {
 		}
 
 		// get flights destinations
-		req, resp, err := amadeus.NewRequest(ShoopingHotelsOffers)
+		req, resp, err := amadeus.NewRequest(ShoppingHotelsOffers)
 
 		// set flights destination request params
-		req.(*ShoopingHotelOffersRequest).SetCityCode("LON")
+		req.(*ShoppingHotelOffersRequest).SetCityCode("LON")
 
 		// send request flight destinations
 		err = amadeus.Do(req, &resp, "GET")
@@ -40,7 +40,7 @@ func TestShoopingHotelsOffers(t *testing.T) {
 		}
 
 		// get flight destination response
-		respData := resp.(*ShoopingHotelsOffersResponse)
+		respData := resp.(*ShoppingHotelsOffersResponse)
 
 		// check if reponse exist
 		if len(respData.Data) == 0 {
@@ -51,14 +51,14 @@ func TestShoopingHotelsOffers(t *testing.T) {
 
 }
 
-func TestShoopingHotelOffers(t *testing.T) {
+func TestShoppingHotelOffers(t *testing.T) {
 
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println("Not found .env file")
 	}
 
-	t.Run("TestShoopingHotelOffers", func(t *testing.T) {
+	t.Run("TestShoppingHotelOffers", func(t *testing.T) {
 
 		// create client
 		amadeus, err := New(
@@ -71,10 +71,10 @@ func TestShoopingHotelOffers(t *testing.T) {
 		}
 
 		// get flights destinations
-		req, resp, err := amadeus.NewRequest(ShoopingHotelOffers)
+		req, resp, err := amadeus.NewRequest(ShoppingHotelOffers)
 
 		// set flights destination request params
-		req.(*ShoopingHotelOffersRequest).SetHotelID("HILONBE3")
+		req.(*ShoppingHotelOffersRequest).SetHotelID("HILONBE3")
 
 		// send request flight destinations
 		err = amadeus.Do(req, &resp, "GET")
@@ -83,7 +83,7 @@ func TestShoopingHotelOffers(t *testing.T) {
 		}
 
 		// get flight destination response
-		respData := resp.(*ShoopingHotelOffersResponse)
+		respData := resp.(*ShoppingHotelOffersResponse)
 
 		// check if reponse exist
 		if len(respData.Data.Offers) == 0 {
@@ -94,14 +94,14 @@ func TestShoopingHotelOffers(t *testing.T) {
 
 }
 
-func TestShoopingHotelOffer(t *testing.T) {
+func TestShoppingHotelOffer(t *testing.T) {
 
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println("Not found .env file")
 	}
 
-	t.Run("TestShoopingHotelOffer", func(t *testing.T) {
+	t.Run("TestShoppingHotelOffer", func(t *testing.T) {
 
 		// create client
 		amadeus, err := New(
@@ -114,10 +114,10 @@ func TestShoopingHotelOffer(t *testing.T) {
 		}
 
 		// get flights destinations
-		req, resp, err := amadeus.NewRequest(ShoopingHotelOffers)
+		req, resp, err := amadeus.NewRequest(ShoppingHotelOffers)
 
 		// set flights destination request params
-		req.(*ShoopingHotelOffersRequest).SetOfferID("3442F83BF3BF9482A7B058D67959FE807FB69B9344F85A4B3F1893DD903E1791")
+		req.(*ShoppingHotelOffersRequest).SetOfferID("3442F83BF3BF9482A7B058D67959FE807FB69B9344F85A4B3F1893DD903E1791")
 
 		// send request flight destinations
 		err = amadeus.Do(req, &resp, "GET")
@@ -126,7 +126,7 @@ func TestShoopingHotelOffer(t *testing.T) {
 		}
 
 		// get flight destination response
-		respData := resp.(*ShoopingHotelOffersResponse)
+		respData := resp.(*ShoppingHotelOffersResponse)
 
 		// check if reponse exist
 		if len(respData.Data.Offers) == 0 {

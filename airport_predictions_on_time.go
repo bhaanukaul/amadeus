@@ -47,8 +47,6 @@ func (dR AirportPredictionsOnTimeRequest) GetURL(baseURL, reqType string) string
 		queryParams = append(queryParams, "date="+dR.Date)
 
 		url = url + "?" + strings.Join(queryParams, "&")
-
-		break
 	}
 
 	return baseURL + url

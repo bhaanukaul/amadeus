@@ -5,7 +5,7 @@ import (
 	"io"
 	"strconv"
 	"strings"
-        // "fmt"
+	// "fmt"
 )
 
 // BookingFlightOrder
@@ -63,9 +63,9 @@ func (sR BookingFlightOrderRequest) NewCard(vendorCode, cardNumber, expiryDate s
 // AddPayment add payment to request
 func (sR *BookingFlightOrderRequest) AddPayment(payment *Payment) *BookingFlightOrderRequest {
 
-        sR.Data.Payments = append(sR.Data.Payments, *payment)
+	sR.Data.Payments = append(sR.Data.Payments, *payment)
 
-        return sR
+	return sR
 }
 
 // AddTraveler add traveler to request
@@ -99,13 +99,12 @@ func (sR *BookingFlightOrderRequest) AddTraveler(traveler *Traveler) *BookingFli
 	return sR
 }
 
-
 // Add carrier code to request
 func (sR *BookingFlightOrderRequest) SetCarrier(carrier string) *BookingFlightOrderRequest {
 
-        sR.Data.CarrierCodes.CarrierCode = carrier
+	sR.Data.CarrierCodes.CarrierCode = carrier
 
-        return sR
+	return sR
 }
 
 // NewContact add contact to request
@@ -194,18 +193,18 @@ func (dR *BookingFlightOrderResponse) Decode(rsp []byte) error {
 }
 
 type OrderData struct {
+	TicketingAgreement TicketingAgreement `json:"ticketingAgreement,omitempty"`
+	CarrierCodes       CarrierCode        `json:"operating,omitempty"`
 	ID                 string             `json:"id,omitempty"`
 	Type               string             `json:"type,omitempty"`
 	AssociatedRecords  []AssociatedRecord `json:"associatedRecords,omitempty"`
 	FlightOffers       []FlightOffer      `json:"flightOffers,omitempty"`
 	Travelers          []Traveler         `json:"travelers,omitempty"`
-	TicketingAgreement TicketingAgreement `json:"ticketingAgreement,omitempty"`
 	Contacts           []Contact          `json:"contacts,omitempty"`
 	Remarks            Remarks            `json:"remarks,omitempty"`
 	FormOfPayments     []FormOfPayments   `json:"formOfPayments,omitempty"`
 	AutomatedProcess   []AutomatedProcess `json:"automatedProcess,omitempty"`
-  Payments           []Payment          `json:"payments,omitempty"`
-  CarrierCodes       CarrierCode        `json:"operating,omitempty"`
+	Payments           []Payment          `json:"payments,omitempty"`
 }
 
 type AssociatedRecord struct {
@@ -221,8 +220,8 @@ type Traveler struct {
 	Name        Name            `json:"name,omitempty"`
 	Gender      string          `json:"gender,omitempty"`
 	Contact     TravelerContact `json:"contact,omitempty"`
-	Documents   []Document      `json:"documents,omitempty,omitempty"`
-        Payments    []Payment       `json:"payments,omitempty"`
+	Documents   []Document      `json:"documents,omitempty"`
+	Payments    []Payment       `json:"payments,omitempty"`
 }
 
 // AddEmail add email address to traveler
@@ -254,17 +253,17 @@ type Name struct {
 }
 
 type TravelerContact struct {
-	EmailAddress string  `json:"emailAddress,omitempty,omitempty"`
-	Phones       []Phone `json:"phones,omitempty,omitempty"`
+	EmailAddress string  `json:"emailAddress,omitempty"`
+	Phones       []Phone `json:"phones,omitempty"`
 }
 
 type Contact struct {
+	Address       Address       `json:"address,omitempty"`
 	AddresseeName AddresseeName `json:"addresseeName,omitempty"`
 	CompanyName   string        `json:"companyName,omitempty"`
 	Purpose       string        `json:"purpose,omitempty"`
-	Phones        []Phone       `json:"phones,omitempty,omitempty"`
-	EmailAddress  string        `json:"emailAddress,omitempty,omitempty"`
-	Address       Address       `json:"address,omitempty,omitempty"`
+	EmailAddress  string        `json:"emailAddress,omitempty"`
+	Phones        []Phone       `json:"phones,omitempty"`
 }
 
 // AddEmail add email address to contact
@@ -310,12 +309,12 @@ type AddresseeName struct {
 }
 
 type Address struct {
-	Lines       []string `json:"lines,omitempty"`
 	PostalCode  string   `json:"postalCode,omitempty"`
 	CountryCode string   `json:"countryCode,omitempty"`
 	CityName    string   `json:"cityName,omitempty"`
 	StateName   string   `json:"stateName,omitempty"`
 	PostalBox   string   `json:"postalBox,omitempty"`
+	Lines       []string `json:"lines,omitempty"`
 }
 
 type Phone struct {

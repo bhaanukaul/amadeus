@@ -39,8 +39,8 @@ type Travelers struct {
 }
 
 type SearchCriteria struct {
-	MaxFlightOffers int           `json:"maxFlightOffers,omitempty"`
 	FlightFilters   FlightFilters `json:"flightFilters,omitempty"`
+	MaxFlightOffers int           `json:"maxFlightOffers,omitempty"`
 }
 
 type FlightFilters struct {
@@ -185,7 +185,7 @@ func (sR *ShoppingFlightOffersRequest) AddTravelers(adult, child, infant int) *S
 func (sR ShoppingFlightOffersRequest) GetURL(baseURL, reqType string) string {
 
 	// set request url
-	url := shoopingFlightOffersURL
+	url := shoppingFlightOffersURL
 
 	// add version
 	switch reqType {
@@ -240,13 +240,10 @@ func (sR ShoppingFlightOffersRequest) GetURL(baseURL, reqType string) string {
 				switch traveler.TravelerType {
 				case "ADULT":
 					adults++
-					break
 				case "CHILD":
 					children++
-					break
 				case "INFANT":
 					infants++
-					break
 				}
 
 			}
@@ -306,25 +303,25 @@ func (sR ShoppingFlightOffersRequest) GetBody(reqType string) io.Reader {
 // RESPONSE
 
 type ShoppingFlightOffersResponse struct {
-	Meta         Meta            `json:"meta,omitempty"`
-	Data         []FlightOffer   `json:"data,omitempty"`
 	Dictionaries Dictionaries    `json:"dictionaries,omitempty"`
+	Data         []FlightOffer   `json:"data,omitempty"`
 	Errors       []ErrorResponse `json:"errors,omitempty"`
+	Meta         Meta            `json:"meta,omitempty"`
 }
 
 type Meta struct {
-	Count    int      `json:"count,omitempty"`
-	Currency string   `json:"currency,omitempty"`
 	Links    Links    `json:"links,omitempty"`
+	Currency string   `json:"currency,omitempty"`
 	Defaults Defaults `json:"defaults,omitempty"`
+	Count    int      `json:"count,omitempty"`
 }
 
 type Defaults struct {
 	DepartureDate string `json:"departureDate,omitempty"`
-	OneWay        bool   `json:"oneWay,omitempty"`
 	Duration      string `json:"duration,omitempty"`
-	NonStop       bool   `json:"nonStop,omitempty"`
 	ViewBy        string `json:"viewBy,omitempty"`
+	OneWay        bool   `json:"oneWay,omitempty"`
+	NonStop       bool   `json:"nonStop,omitempty"`
 }
 
 // Decode implement Response interface

@@ -3,20 +3,20 @@ package amadeus
 // FlightOffer
 
 type FlightOffer struct {
-	Type                     string            `json:"type,omitempty"`
+	Price                    Price             `json:"price,omitempty"`
+	LastTicketingDate        string            `json:"lastTicketingDate,omitempty"`
 	ID                       string            `json:"id,omitempty"`
 	Source                   string            `json:"source,omitempty"`
-	InstantTicketingRequired bool              `json:"instantTicketingRequired,omitempty"`
-	NonHomogeneous           bool              `json:"nonHomogeneous,omitempty"`
-	OneWay                   bool              `json:"oneWay,omitempty"`
-	LastTicketingDate        string            `json:"lastTicketingDate,omitempty"`
-	NumberOfBookableSeats    int               `json:"numberOfBookableSeats,omitempty"`
+	Type                     string            `json:"type,omitempty"`
+	Operating                []Operating       `json:"operating,omitempty"`
 	Itineraries              []Itinerarie      `json:"itineraries,omitempty"`
-        Operating                []Operating       `json:"operating,omitempty"`
-	Price                    Price             `json:"price,omitempty"`
-	PricingOptions           PricingOption     `json:"pricingOptions,omitempty"`
 	ValidatingAirlineCodes   []string          `json:"validatingAirlineCodes,omitempty"`
 	TravelerPricings         []TravelerPricing `json:"travelerPricings,omitempty"`
+	PricingOptions           PricingOption     `json:"pricingOptions,omitempty"`
+	NumberOfBookableSeats    int               `json:"numberOfBookableSeats,omitempty"`
+	OneWay                   bool              `json:"oneWay,omitempty"`
+	NonHomogeneous           bool              `json:"nonHomogeneous,omitempty"`
+	InstantTicketingRequired bool              `json:"instantTicketingRequired,omitempty"`
 	PaymentCardRequired      bool              `json:"paymentCardRequired,omitempty"`
 }
 
@@ -54,19 +54,19 @@ type Operating struct {
 }
 
 type Co2Emission struct {
-	Weight     int    `json:"weight,omitempty"`
 	WeightUnit string `json:"weightUnit,omitempty"`
 	Cabin      string `json:"cabin,omitempty"`
+	Weight     int    `json:"weight,omitempty"`
 }
 
 type Price struct {
 	Currency        string  `json:"currency,omitempty"`
 	Total           string  `json:"total,omitempty"`
 	Base            string  `json:"base,omitempty"`
-	Fees            []Fees  `json:"fees,omitempty"`
-	Taxes           []Taxes `json:"taxes,omitempty"`
 	GrandTotal      string  `json:"grandTotal,omitempty"`
 	BillingCurrency string  `json:"billingCurrency,omitempty"`
+	Fees            []Fees  `json:"fees,omitempty"`
+	Taxes           []Taxes `json:"taxes,omitempty"`
 }
 
 type Fees struct {

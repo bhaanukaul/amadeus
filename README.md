@@ -123,7 +123,7 @@ go get https://github.com/fakovacic/amadeus
 
 ### AIR
 
-#### Search & Shooping
+#### Search & Shopping
 
  * GET  /v2/shopping/flight-offers
  * POST /v2/shopping/flight-offers
@@ -162,7 +162,7 @@ go get https://github.com/fakovacic/amadeus
 
 ### Hotel
 
-#### Search & Shooping
+#### Search & Shopping
 
  * GET /v2/shopping/hotel-offers
  * GET /v2/shopping/hotel-offers/by-hotel

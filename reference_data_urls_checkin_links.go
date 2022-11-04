@@ -49,8 +49,6 @@ func (dR ReferenceDataUrlsCheckinLinksRequest) GetURL(baseURL, reqType string) s
 		}
 
 		url = url + "?" + strings.Join(queryParams, "&")
-
-		break
 	}
 
 	return baseURL + url

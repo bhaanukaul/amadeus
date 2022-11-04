@@ -14,15 +14,15 @@ func (l LocationSubType) String() string {
 }
 
 const (
-	AIRPORT LocationSubType = "AIRPORT"
-	CITY                    = "CITY"
+	AIRPORT = "AIRPORT"
+	CITY    = "CITY"
 )
 
 type LocationViewType string
 
 const (
-	FULL  LocationViewType = "FULL"
-	LIGHT                  = "LIGHT"
+	FULL  = "FULL"
+	LIGHT = "LIGHT"
 )
 
 type ReferenceDataLocationsRequest struct {
@@ -30,15 +30,11 @@ type ReferenceDataLocationsRequest struct {
 	Latitude    string           `json:"latitude"`
 	Longitude   string           `json:"longitude"`
 	Radius      string           `json:"radius"`
-	SubType     []string         `json:"subType"`
 	Keyword     string           `json:"keyword"`
 	CountryCode string           `json:"countryCode"`
 	View        LocationViewType `json:"view"`
 	Sort        string           `json:"sort"`
-
-	// TODO
-	//page[offset]
-	//page[limit]
+	SubType     []string         `json:"subType"`
 }
 
 // SetLocationID set location id
@@ -193,7 +189,6 @@ func (dR ReferenceDataLocationsRequest) GetURL(baseURL, reqType string) string {
 			return url + "?" + strings.Join(queryParams, "&")
 		}
 
-		break
 	}
 
 	return ""
@@ -237,6 +232,8 @@ func (dR *ReferenceDataLocationResponse) Decode(rsp []byte) error {
 }
 
 type LocationData struct {
+	Address        LocationAddress   `json:"address"`
+	Distance       Distance          `json:"distance"`
 	Type           string            `json:"type"`
 	SubType        string            `json:"subType"`
 	Name           string            `json:"name"`
@@ -244,8 +241,6 @@ type LocationData struct {
 	TimeZoneOffset string            `json:"timeZoneOffset"`
 	IataCode       string            `json:"iataCode"`
 	GeoCode        GeoCode           `json:"geoCode"`
-	Address        LocationAddress   `json:"address"`
-	Distance       Distance          `json:"distance"`
 	Analytics      LocationAnalytics `json:"analytics"`
 	Relevance      float64           `json:"relevance"`
 }
@@ -264,8 +259,8 @@ type LocationAddress struct {
 }
 
 type Distance struct {
-	Value int    `json:"value"`
 	Unit  string `json:"unit"`
+	Value int    `json:"value"`
 }
 
 type LocationAnalytics struct {

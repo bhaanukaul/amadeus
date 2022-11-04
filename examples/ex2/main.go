@@ -1,17 +1,18 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"time"
-        "encoding/json"
-	"amadeus2"
+
+	"github.com/bhaanukaul/amadeus"
 )
 
 type Iot struct {
-	Id      int             `json:"id"`
 	Name    string          `json:"name"`
 	Context json.RawMessage `json:"context"`
+	Id      int             `json:"id"`
 }
 
 func main() {
@@ -41,15 +42,15 @@ func main() {
 	// get response
 	offerRespData := offerResp.(*amadeus.ShoppingFlightOffersResponse)
 
-        // get pricing request&response
-        pricingReq, pricingResp, err := client.NewRequest(amadeus.ShoppingFlightPricing)
+	// get pricing request&response
+	pricingReq, pricingResp, err := client.NewRequest(amadeus.ShoppingFlightPricing)
 
-        // add offer from flight offers response
-        pricingReq.(*amadeus.ShoppingFlightPricingRequest).AddOffer(
-            offerRespData.GetOffer(0),
-        )
+	// add offer from flight offers response
+	pricingReq.(*amadeus.ShoppingFlightPricingRequest).AddOffer(
+		offerRespData.GetOffer(0),
+	)
 
-        err = client.Do(pricingReq, &pricingResp, "POST")
-        // println(offerRespData)
+	err = client.Do(pricingReq, &pricingResp, "POST")
+	// println(offerRespData)
 
 }

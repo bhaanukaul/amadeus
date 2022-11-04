@@ -157,8 +157,8 @@ type HotelBookingsResponseData struct {
 	Type                   string              `json:"type,omitempty"`
 	ID                     string              `json:"id,omitempty"`
 	ProviderConfirmationID string              `json:"providerConfirmationId,omitempty"`
-	AssociatedRecords      []AssociatedRecords `json:"associatedRecords,omitempty"`
 	Self                   string              `json:"self,omitempty"`
+	AssociatedRecords      []AssociatedRecords `json:"associatedRecords,omitempty"`
 }
 
 type AssociatedRecords struct {

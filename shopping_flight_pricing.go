@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"io"
 	"strings"
-        // "fmt"
+	// "fmt"
 )
 
 // ShoppingFlightPricingRequest
@@ -28,7 +28,7 @@ func (sR *ShoppingFlightPricingRequest) AddOffer(offer FlightOffer) *ShoppingFli
 func (sR ShoppingFlightPricingRequest) GetURL(baseURL, reqType string) string {
 
 	// set request url
-	url := shoopingFlightOffersPricingURL
+	url := shoppingFlightOffersPricingURL
 
 	// add version
 	switch reqType {
@@ -47,7 +47,7 @@ func (sR ShoppingFlightPricingRequest) GetBody(reqType string) io.Reader {
 	switch reqType {
 	case "POST":
 		reqPayload, err := json.Marshal(sR)
-                // fmt.Println(strings.NewReader(string(reqPayload)))
+		// fmt.Println(strings.NewReader(string(reqPayload)))
 		if err != nil {
 			return nil
 		}

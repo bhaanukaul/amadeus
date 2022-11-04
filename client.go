@@ -33,28 +33,28 @@ const (
 	///////////
 
 	//
-	// Shooping
+	// Shopping
 	//
 
 	// Flight Offers Search
 	// search for offers on given origin, destination, departure, passangers
-	shoopingFlightOffersURL = "/shopping/flight-offers"
+	shoppingFlightOffersURL = "/shopping/flight-offers"
 
 	// Flight Inspiration Search
 	//
-	shoopingFlightDestinationsURL = "/shopping/flight-destinations"
+	shoppingFlightDestinationsURL = "/shopping/flight-destinations"
 
 	// Flight Cheapest Date Search
 	//
-	shoopingFlightDatesURL = "/shopping/flight-dates"
+	shoppingFlightDatesURL = "/shopping/flight-dates"
 
-	// Shooping Flight offers pricing
+	// Shopping Flight offers pricing
 	// check certain offer if is still active, response with additional data for offer
-	shoopingFlightOffersPricingURL = "/shopping/flight-offers/pricing"
+	shoppingFlightOffersPricingURL = "/shopping/flight-offers/pricing"
 
 	// Seatmap Display
 	//
-	shoopingSeatmapsURL = "/shopping/seatmaps"
+	shoppingSeatmapsURL = "/shopping/seatmaps"
 
 	//
 	// Booking
@@ -99,12 +99,12 @@ const (
 	/////////////
 
 	//
-	// Shooping
+	// Shopping
 	//
 
 	// Hotel Search
 	// search for hotel offers on destination
-	shoopingHotelOffersURL = "/shopping/hotel-offers"
+	shoppingHotelOffersURL = "/shopping/hotel-offers"
 
 	// Hotel Ratings
 	// get hotel reputation by hotel ids
@@ -174,11 +174,11 @@ const (
 	// AirportPredictionsOnTime //
 	AirportPredictionsOnTime
 
-	// ShoopingHotelsOffers //
-	ShoopingHotelsOffers
+	// ShoppingHotelsOffers //
+	ShoppingHotelsOffers
 
-	// ShoopingHotelOffers //
-	ShoopingHotelOffers
+	// ShoppingHotelOffers //
+	ShoppingHotelOffers
 
 	// EReputationHotelSentiments //
 	EReputationHotelSentiments
@@ -339,10 +339,10 @@ func (a *Amadeus) NewRequest(req int) (Request, Response, error) {
 	//
 	// HOTELS
 	//
-	case ShoopingHotelsOffers:
-		return new(ShoopingHotelOffersRequest), new(ShoopingHotelsOffersResponse), nil
-	case ShoopingHotelOffers:
-		return new(ShoopingHotelOffersRequest), new(ShoopingHotelOffersResponse), nil
+	case ShoppingHotelsOffers:
+		return new(ShoppingHotelOffersRequest), new(ShoppingHotelsOffersResponse), nil
+	case ShoppingHotelOffers:
+		return new(ShoppingHotelOffersRequest), new(ShoppingHotelOffersResponse), nil
 	case EReputationHotelSentiments:
 		return new(EReputationHotelSentimentsRequest), new(EReputationHotelSentimentsResponse), nil
 	case BookingHotelBookings:
@@ -435,22 +435,22 @@ func (a *Amadeus) Do(req Request, resp *Response, reqType string) error {
 // Generic structs
 
 type ErrorResponse struct {
-	Code   int    `json:"code,omitempty"`
-	Title  string `json:"title,omitempty"`
-	Detail string `json:"detail,omitempty"`
 	Source struct {
 		Pointer string `json:"pointer,omitempty"`
 		Example string `json:"example,omitempty"`
 	} `json:"source,omitempty"`
-	Status int `json:"status,omitempty"`
+	Title  string `json:"title,omitempty"`
+	Detail string `json:"detail,omitempty"`
+	Code   int    `json:"code,omitempty"`
+	Status int    `json:"status,omitempty"`
 }
 
 type Warnings struct {
-	Status int    `json:"status"`
-	Code   int    `json:"code"`
+	Source Source `json:"source"`
 	Title  string `json:"title"`
 	Detail string `json:"detail"`
-	Source Source `json:"source"`
+	Status int    `json:"status"`
+	Code   int    `json:"code"`
 }
 
 type Source struct {
